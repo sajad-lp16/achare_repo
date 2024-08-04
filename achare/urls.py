@@ -2,16 +2,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include
 
 from rest_framework import permissions
+from rest_framework_simplejwt import views as jwt_views
 
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 
-from rest_framework_simplejwt import views as jwt_views
-
-from django.contrib import admin
-from django.urls import path, include
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -26,7 +25,8 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('accounts/', include('core_apps.accounts.urls', namespace='accounts')),
+    path(settings.ADMIN_URL, admin.site.urls),
 ]
 
 if settings.DEBUG:
