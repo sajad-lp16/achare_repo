@@ -4,8 +4,8 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import PermissionsMixin, AbstractUser
 from django.contrib.auth.base_user import AbstractBaseUser
 
-from core_apps.accounts.managers import CustomUserManager
-from core_apps.accounts.utils.validators import phone_number_validator
+from core_apps.accounts.model_managers import CustomUserManager
+from core_apps.accounts.utils.model_validators import phone_number_validator
 
 
 class User(AbstractBaseUser, PermissionsMixin):

@@ -143,15 +143,13 @@ LOGGING = {
     },
 }
 
-# --------------------------------------------------- JWT --------------------------------------------------------------
+# --------------------------------------------------- AUTH -------------------------------------------------------------
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Token', 'token'),
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'SIGNING_KEY': config('SECRET_KEY'),
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
     'UPDATE_LAST_LOGIN': True,
 }
 
@@ -163,3 +161,13 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
 }
+
+OTP_TIMEOUT_SECONDS = config('OTP_TIMEOUT_SECONDS', cast=int)
+
+MAXIMUM_ALLOWED_LOGIN_REQUESTS = config('MAXIMUM_ALLOWED_LOGIN_REQUESTS', cast=int)
+MAXIMUM_ALLOWED_REGISTER_REQUESTS = config('MAXIMUM_ALLOWED_LOGIN_REQUESTS', cast=int)
+
+LOGIN_REQUEST_BLOCK_TIMEOUT_MINUTES = config('LOGIN_REQUEST_BLOCK_TIMEOUT_MINUTES', cast=int)
+LOGIN_REQUEST_BLOCK_TIMEOUT_SECONDS = LOGIN_REQUEST_BLOCK_TIMEOUT_MINUTES * 60
+REGISTER_REQUEST_BLOCK_TIMEOUT_MINUTES = config('REGISTER_REQUEST_BLOCK_TIMEOUT_MINUTES', cast=int)
+REGISTER_REQUEST_BLOCK_TIMEOUT_SECONDS = REGISTER_REQUEST_BLOCK_TIMEOUT_MINUTES * 60
