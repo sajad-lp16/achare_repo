@@ -35,7 +35,7 @@ User = get_user_model()
 class LoginRequestAPIView(generics.CreateAPIView):
     serializer_class = LoginRequestSerializer
     permission_classes = [AllowAny]
-    throttle_manager = LoginRequestThrottle()
+    throttle_manager = LoginRequestThrottle
     response_manager = LoginRequestResponseManager()
 
     def post(self, request: Request, *args, **kwargs) -> Response:
@@ -59,7 +59,7 @@ class LoginRequestAPIView(generics.CreateAPIView):
 
 class RegisterView(generics.UpdateAPIView):
     serializer_class = EnableUserSerializer
-    throttle_manager = RegisterThrottle()
+    throttle_manager = RegisterThrottle
     permission_classes = [AllowAny]
     response_manager = RegisterResponseManager()
     http_method_names = ['patch']
@@ -88,8 +88,8 @@ class RegisterView(generics.UpdateAPIView):
 
 class LoginView(TokenObtainPairView):
     permission_classes = AllowAny,
-    throttle_manager = LoginThrottle()
-    response_manager = LoginResponseManager()
+    throttle_manager = LoginThrottle
+    response_manager = LoginResponseManager
 
     def post(self, request: Request, *args, **kwargs) -> Response:
         phone_number = request.data.get('phone_number', '')

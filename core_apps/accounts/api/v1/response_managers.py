@@ -18,28 +18,31 @@ class LoginRequestResponseManager:
         LOGIN_STEP: 'welcome to the app, please enter your password',
     }
 
-    def get_login_step_response(self, data: dict={}):
-        response = self.RESPONSE_INTERFACE.copy()
+    @classmethod
+    def get_login_step_response(cls, data: dict = {}):
+        response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'success'
-        response['message'] = self.STEP_2_MESSAGE[self.LOGIN_STEP]
-        response['next_step'] = self.LOGIN_STEP
+        response['message'] = cls.STEP_2_MESSAGE[cls.LOGIN_STEP]
+        response['next_step'] = cls.LOGIN_STEP
 
         response.update(data)
 
         return Response(response, status=status.HTTP_200_OK)
 
-    def get_register_step_response(self, data: dict={}):
-        response = self.RESPONSE_INTERFACE.copy()
+    @classmethod
+    def get_register_step_response(cls, data: dict = {}):
+        response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'success'
-        response['message'] = self.STEP_2_MESSAGE[self.REGISTER_STEP]
-        response['next_step'] = self.REGISTER_STEP
+        response['message'] = cls.STEP_2_MESSAGE[cls.REGISTER_STEP]
+        response['next_step'] = cls.REGISTER_STEP
 
         response.update(data)
 
         return Response(response, status=status.HTTP_201_CREATED)
 
-    def get_invalid_phone_number_response(self, data: dict={}):
-        response = self.RESPONSE_INTERFACE.copy()
+    @classmethod
+    def get_invalid_phone_number_response(cls, data: dict = {}):
+        response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'invalid phone number'
 
@@ -47,8 +50,9 @@ class LoginRequestResponseManager:
 
         return Response(response, status=status.HTTP_406_NOT_ACCEPTABLE)
 
-    def get_throttle_response(self, data: dict={}):
-        response = self.RESPONSE_INTERFACE.copy()
+    @classmethod
+    def get_throttle_response(cls, data: dict = {}):
+        response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'request limit exceeded'
 
@@ -63,8 +67,9 @@ class RegisterResponseManager:
         'message': None,
     }
 
-    def get_register_ok_response(self, data: dict={}):
-        response = self.RESPONSE_INTERFACE.copy()
+    @classmethod
+    def get_register_ok_response(cls, data: dict = {}):
+        response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'success'
         response['message'] = 'successful registration, profile info is now updated'
 
@@ -72,8 +77,9 @@ class RegisterResponseManager:
 
         return Response(response, status=status.HTTP_200_OK)
 
-    def get_not_found_response(self, data: dict={}):
-        response = self.RESPONSE_INTERFACE.copy()
+    @classmethod
+    def get_not_found_response(cls, data: dict = {}):
+        response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'not registered yet'
 
@@ -81,8 +87,9 @@ class RegisterResponseManager:
 
         return Response(response, status=status.HTTP_404_NOT_FOUND)
 
-    def get_invalid_phone_number_response(self, data: dict={}):
-        response = self.RESPONSE_INTERFACE.copy()
+    @classmethod
+    def get_invalid_phone_number_response(cls, data: dict = {}):
+        response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'invalid phone number'
 
@@ -90,8 +97,9 @@ class RegisterResponseManager:
 
         return Response(response, status=status.HTTP_406_NOT_ACCEPTABLE)
 
-    def get_already_registered_response(self, data: dict={}):
-        response = self.RESPONSE_INTERFACE.copy()
+    @classmethod
+    def get_already_registered_response(cls, data: dict = {}):
+        response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'already registered, you should login instead'
 
@@ -99,8 +107,9 @@ class RegisterResponseManager:
 
         return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
-    def get_throttle_response(self, data: dict={}):
-        response = self.RESPONSE_INTERFACE.copy()
+    @classmethod
+    def get_throttle_response(cls, data: dict = {}):
+        response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'request limit exceeded'
 
@@ -117,8 +126,9 @@ class LoginResponseManager:
         'refresh': None,
     }
 
-    def get_login_ok_response(self, data: dict={}):
-        response = self.RESPONSE_INTERFACE.copy()
+    @classmethod
+    def get_login_ok_response(cls, data: dict = {}):
+        response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'success'
         response['message'] = 'logged in successfully'
 
@@ -126,8 +136,9 @@ class LoginResponseManager:
 
         return Response(response, status=status.HTTP_200_OK)
 
-    def get_invalid_phone_number_response(self, data: dict={}):
-        response = self.RESPONSE_INTERFACE.copy()
+    @classmethod
+    def get_invalid_phone_number_response(cls, data: dict = {}):
+        response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'invalid phone number'
 
@@ -135,8 +146,9 @@ class LoginResponseManager:
 
         return Response(response, status=status.HTTP_406_NOT_ACCEPTABLE)
 
-    def get_throttle_response(self, data: dict={}):
-        response = self.RESPONSE_INTERFACE.copy()
+    @classmethod
+    def get_throttle_response(cls, data: dict = {}):
+        response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'request limit exceeded'
 
