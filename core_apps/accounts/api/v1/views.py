@@ -1,15 +1,10 @@
 from django.contrib.auth import get_user_model
 
-from rest_framework import status
 from rest_framework import generics
 from rest_framework.request import Request
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView
-)
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from core_apps.utils.otp_service import OTPService
 
@@ -94,7 +89,7 @@ class LoginView(TokenObtainPairView):
     def post(self, request: Request, *args, **kwargs) -> Response:
         phone_number = request.data.get('phone_number', '')
         if not is_valid_phone_number(phone_number):
-            return self.error_response
+            return self.response_manager.get_invalid_phone_number_response()
 
         if not self.throttle_manager.check(request):
             return self.response_manager.get_throttle_response()

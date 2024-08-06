@@ -7,6 +7,10 @@ from core_apps.utils.ip_tools import get_client_ip
 
 
 class BaseThrottle:
+    cache_timeout: int
+    request_limit: int
+    cache_key_template: str
+
     @classmethod
     def _is_allowed(cls, cache_key: str) -> bool:
         rate = cache.get(cache_key) or 0

@@ -3,7 +3,11 @@ from rest_framework.response import Response
 
 
 class LoginRequestResponseManager:
-    '''Respects the response interface no matter what!'''
+    """
+    Response Generator for LoginRequest API
+    Its is separated to make API more readable
+    and also to respect one interface as api response, no matter what!
+    """
     RESPONSE_INTERFACE = {
         'status': None,
         'message': None,
@@ -19,7 +23,9 @@ class LoginRequestResponseManager:
     }
 
     @classmethod
-    def get_login_step_response(cls, data: dict = {}):
+    def get_login_step_response(cls, data: dict = {}) -> Response:
+        """specifies that next api which should be called is login API"""
+
         response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'success'
         response['message'] = cls.STEP_2_MESSAGE[cls.LOGIN_STEP]
@@ -30,7 +36,9 @@ class LoginRequestResponseManager:
         return Response(response, status=status.HTTP_200_OK)
 
     @classmethod
-    def get_register_step_response(cls, data: dict = {}):
+    def get_register_step_response(cls, data: dict = {}) -> Response:
+        """specifies that next api which should be called is register API"""
+
         response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'success'
         response['message'] = cls.STEP_2_MESSAGE[cls.REGISTER_STEP]
@@ -41,7 +49,9 @@ class LoginRequestResponseManager:
         return Response(response, status=status.HTTP_201_CREATED)
 
     @classmethod
-    def get_invalid_phone_number_response(cls, data: dict = {}):
+    def get_invalid_phone_number_response(cls, data: dict = {}) -> Response:
+        """submitted phone_number doesn't match the correct pattern"""
+
         response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'invalid phone number'
@@ -51,7 +61,9 @@ class LoginRequestResponseManager:
         return Response(response, status=status.HTTP_406_NOT_ACCEPTABLE)
 
     @classmethod
-    def get_throttle_response(cls, data: dict = {}):
+    def get_throttle_response(cls, data: dict = {}) -> Response:
+        """the user is blocked"""
+
         response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'request limit exceeded'
@@ -62,13 +74,20 @@ class LoginRequestResponseManager:
 
 
 class RegisterResponseManager:
+    """
+    Response Generator for RegisterRequest API
+    Its is separated to make API more readable
+    and also to respect one interface as api response, no matter what!
+    """
     RESPONSE_INTERFACE = {
         'status': None,
         'message': None,
     }
 
     @classmethod
-    def get_register_ok_response(cls, data: dict = {}):
+    def get_register_ok_response(cls, data: dict = {}) -> Response:
+        """user instance is enabled and also the profile is updated"""
+
         response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'success'
         response['message'] = 'successful registration, profile info is now updated'
@@ -78,7 +97,9 @@ class RegisterResponseManager:
         return Response(response, status=status.HTTP_200_OK)
 
     @classmethod
-    def get_not_found_response(cls, data: dict = {}):
+    def get_not_found_response(cls, data: dict = {}) -> Response:
+        """cant find the use related to the given phone_number"""
+
         response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'not registered yet'
@@ -88,7 +109,9 @@ class RegisterResponseManager:
         return Response(response, status=status.HTTP_404_NOT_FOUND)
 
     @classmethod
-    def get_invalid_phone_number_response(cls, data: dict = {}):
+    def get_invalid_phone_number_response(cls, data: dict = {}) -> Response:
+        """submitted phone_number doesn't match the correct pattern"""
+
         response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'invalid phone number'
@@ -98,7 +121,9 @@ class RegisterResponseManager:
         return Response(response, status=status.HTTP_406_NOT_ACCEPTABLE)
 
     @classmethod
-    def get_already_registered_response(cls, data: dict = {}):
+    def get_already_registered_response(cls, data: dict = {}) -> Response:
+        """user is already registered and his user instance is enabled"""
+
         response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'already registered, you should login instead'
@@ -108,7 +133,9 @@ class RegisterResponseManager:
         return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
     @classmethod
-    def get_throttle_response(cls, data: dict = {}):
+    def get_throttle_response(cls, data: dict = {}) -> Response:
+        """the user is blocked"""
+
         response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'request limit exceeded'
@@ -119,6 +146,11 @@ class RegisterResponseManager:
 
 
 class LoginResponseManager:
+    """
+    Response Generator for Login API,
+    Its is separated to make API more readable
+    and also to respect one interface as api response, no matter what!
+    """
     RESPONSE_INTERFACE = {
         'status': None,
         'message': None,
@@ -127,7 +159,9 @@ class LoginResponseManager:
     }
 
     @classmethod
-    def get_login_ok_response(cls, data: dict = {}):
+    def get_login_ok_response(cls, data: dict = {}) -> Response:
+        """every thing is alright and return refresh and access"""
+
         response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'success'
         response['message'] = 'logged in successfully'
@@ -137,7 +171,9 @@ class LoginResponseManager:
         return Response(response, status=status.HTTP_200_OK)
 
     @classmethod
-    def get_invalid_phone_number_response(cls, data: dict = {}):
+    def get_invalid_phone_number_response(cls, data: dict = {}) -> Response:
+        """submitted phone_number doesn't match the correct pattern"""
+
         response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'invalid phone number'
@@ -147,7 +183,9 @@ class LoginResponseManager:
         return Response(response, status=status.HTTP_406_NOT_ACCEPTABLE)
 
     @classmethod
-    def get_throttle_response(cls, data: dict = {}):
+    def get_throttle_response(cls, data: dict = {}) -> Response:
+        """submitted phone_number doesn't match the correct pattern"""
+
         response = cls.RESPONSE_INTERFACE.copy()
         response['status'] = 'error'
         response['message'] = 'request limit exceeded'
