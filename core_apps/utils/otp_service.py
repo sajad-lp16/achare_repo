@@ -8,12 +8,16 @@ class OTPService:
     LOGIN_REQUEST_CACHE_KEY = 'otp_login_code_user_{phone_number}'
 
     @staticmethod
-    def _generate_otp_code():
+    def _generate_otp_code() -> int:
         return random.randint(100000, 999999)
 
     @classmethod
     def _set_code(cls, cache_key: str, otp_code: str | int) -> None:
         cache.set(cache_key, otp_code, settings.OTP_TIMEOUT_SECONDS)
+
+    @classmethod
+    def _revoke_code(cls, cache_key: str) -> None:
+        cache.delete(cache_key)
 
     @classmethod
     def _code_matches(cls, cache_key: str, otp_code: str | int) -> bool:
@@ -30,6 +34,8 @@ class OTPService:
         cache_key = cls.LOGIN_REQUEST_CACHE_KEY.format(phone_number=phone_number)
         if not cls._code_matches(cache_key, otp_code):
             return False
+
+        cls._revoke_code(cache_key)
         return True
 
     @classmethod

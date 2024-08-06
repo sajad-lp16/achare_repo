@@ -19,8 +19,11 @@ class EnableUserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('phone_number', 'password', 'code', 'first_name', 'last_name', 'email')
 
+        extra_kwargs = {'password': {'write_only': True}}
+
     def validate_password(self, value: str):
         validate_password(value)
+        return value
 
     def validate(self, attrs):
         phone_number = attrs.get('phone_number', '')
