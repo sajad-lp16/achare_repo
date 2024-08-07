@@ -12,7 +12,7 @@ class BaseThrottle:
     cache_key_template: str
 
     @classmethod
-    def _is_allowed(cls, cache_key: str) -> bool:
+    def _limit_is_reached(cls, cache_key: str) -> bool:
         rate = cache.get(cache_key) or 0
         return rate >= cls.request_limit
 
@@ -26,7 +26,7 @@ class BaseThrottle:
         ip = get_client_ip(request)
         cache_key = cls.cache_key_template.format(ip=ip)
 
-        if cls._is_allowed(cache_key):
+        if cls._limit_is_reached(cache_key):
             return False
 
         cls._update_request_rate(cache_key)
